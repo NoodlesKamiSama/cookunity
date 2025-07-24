@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TECHNICAL_DOCUMENTATION</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+</head>
+<body>
+<h1
+id="cookunity-qa-automation-framework---technical-documentation">CookUnity
+QA Automation Framework - Technical Documentation</h1>
+<p><strong>Author</strong>: Wagner Salustiano<br />
+<strong>Project</strong>: CookUnity Senior QA Engineer Role
+Application<br />
+<strong>Framework</strong>: Cypress with Allure Reporting<br />
+<strong>Date</strong>: July 2024<br />
+<strong>Version</strong>: 1.0.0</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#architecture-overview">Architecture Overview</a></li>
+<li><a href="#technical-implementation">Technical
+Implementation</a></li>
+<li><a href="#custom-commands-library">Custom Commands Library</a></li>
+<li><a href="#test-suite-analysis">Test Suite Analysis</a></li>
+<li><a href="#configuration-management">Configuration
+Management</a></li>
+<li><a href="#allure-reporting-integration">Allure Reporting
+Integration</a></li>
+<li><a href="#design-patterns-and-best-practices">Design Patterns and
+Best Practices</a></li>
+<li><a href="#error-handling-strategy">Error Handling Strategy</a></li>
+<li><a href="#performance-considerations">Performance
+Considerations</a></li>
+<li><a href="#maintenance-and-scalability">Maintenance and
+Scalability</a></li>
+<li><a href="#technical-challenges-and-solutions">Technical Challenges
+and Solutions</a></li>
+</ol>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This document provides a comprehensive technical analysis of the
+CookUnity QA Automation Framework, a sophisticated end-to-end testing
+solution built with Cypress and enhanced with Allure reporting
+capabilities. The framework demonstrates enterprise-level automation
+practices through a combination of UI and API testing strategies.</p>
+<h3 id="key-technical-achievements">Key Technical Achievements</h3>
+<ul>
+<li><strong>Modular Architecture</strong>: Clean separation of concerns
+with reusable custom commands</li>
+<li><strong>Cross-Origin Handling</strong>: Advanced techniques for
+multi-domain authentication flows</li>
+<li><strong>Dynamic Data Generation</strong>: Intelligent test data
+management with unique identifiers</li>
+<li><strong>Comprehensive Error Handling</strong>: Robust exception
+management for production-like environments</li>
+<li><strong>Enterprise Reporting</strong>: Rich Allure integration with
+detailed analytics and visualizations</li>
+<li><strong>API Testing Excellence</strong>: Complete RESTful API
+validation with authentication and error scenarios</li>
+</ul>
+<h3 id="technology-stack">Technology Stack</h3>
+<pre><code>Frontend Testing: Cypress 14.5.2 + Custom Commands
+API Testing: Cypress Request Library + Bearer Token Authentication  
+Reporting: Allure Framework 2.25.0 + Shelex Cypress Plugin 2.40.2
+Configuration: Node.js Environment Variables + Properties Files
+CI/CD Ready: Background execution + Artifact generation</code></pre>
+<hr />
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="system-architecture-diagram">System Architecture Diagram</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    CookUnity QA Framework                   │
+├─────────────────────────────────────────────────────────────┤
+│  Test Layer                                                 │
+│  ┌─────────────────┐    ┌─────────────────────────────────┐ │
+│  │   UI Tests      │    │        API Tests                │ │
+│  │ ┌─────────────┐ │    │ ┌─────────────┐ ┌─────────────┐ │ │
+│  │ │User Flow    │ │    │ │User Verify  │ │User Update  │ │ │
+│  │ │Registration │ │    │ │3 Test Cases │ │5 Test Cases │ │ │
+│  │ └─────────────┘ │    │ └─────────────┘ └─────────────┘ │ │
+│  └─────────────────┘    └─────────────────────────────────┘ │
+├─────────────────────────────────────────────────────────────┤
+│  Command Layer (Abstraction)                               │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ │
+│  │ UI Commands │ │API Commands │ │   Utility Commands      │ │
+│  │6 Commands   │ │4 Commands   │ │  4 Helper Functions     │ │
+│  └─────────────┘ └─────────────┘ └─────────────────────────┘ │
+├─────────────────────────────────────────────────────────────┤
+│  Configuration Layer                                       │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐ │
+│  │cypress.config│ │Environment  │ │   allure.properties     │ │
+│  │Node Events  │ │Variables    │ │  Reporting Config       │ │
+│  └─────────────┘ └─────────────┘ └─────────────────────────┘ │
+├─────────────────────────────────────────────────────────────┤
+│  Reporting Layer                                           │
+│  ┌─────────────────────────────────────────────────────────┐ │
+│  │              Allure Framework                           │ │
+│  │  Results Generation → HTML Reports → Analytics         │ │
+│  └─────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="directory-structure-analysis">Directory Structure Analysis</h3>
+<pre><code>cookunity/
+├── cypress/                           # Core testing framework
+│   ├── e2e/                          # Test specifications
+│   │   ├── api/                      # RESTful API testing
+│   │   │   ├── gorest-users-verification.cy.js  # 3 verification scenarios
+│   │   │   └── gorest-users-update.cy.js        # 5 update scenarios  
+│   │   └── ui/                       # User interface testing
+│   │       └── cookunity-user-flow.cy.js        # Complete user journey
+│   ├── screenshots/                  # Test failure artifacts
+│   ├── videos/                      # Execution recordings
+│   └── support/                     # Framework extensions
+│       ├── commands.js              # 14 custom commands
+│       └── e2e.js                   # Global configurations
+├── allure-results/                  # Raw test execution data
+├── allure-report/                   # Generated HTML reports
+├── allure.properties               # Allure framework configuration
+├── cypress.config.js               # Primary configuration
+├── package.json                    # Dependencies and scripts
+└── node_modules/                   # Third-party libraries</code></pre>
+<hr />
+<h2 id="technical-implementation">Technical Implementation</h2>
+<h3 id="framework-foundation">Framework Foundation</h3>
+<p><strong>Cypress Configuration</strong>:
+<code>cypress.config.js</code></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { defineConfig } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;cypress&#39;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> allureWriter <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;@shelex/cypress-allure-plugin/writer&#39;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>module<span class="op">.</span><span class="at">exports</span> <span class="op">=</span> <span class="fu">defineConfig</span>({</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">e2e</span><span class="op">:</span> {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">baseUrl</span><span class="op">:</span> <span class="st">&#39;https://www.cookunity.com&#39;</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">viewportWidth</span><span class="op">:</span> <span class="dv">1920</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">viewportHeight</span><span class="op">:</span> <span class="dv">1080</span><span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">defaultCommandTimeout</span><span class="op">:</span> <span class="dv">10000</span><span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... additional configurations</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setupNodeEvents</span>(on<span class="op">,</span> config) {</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">allureWriter</span>(on<span class="op">,</span> config)  <span class="co">// Allure integration</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Custom task handlers</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">on</span>(<span class="st">&#39;task&#39;</span><span class="op">,</span> {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">log</span>(message) {</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>          <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(message)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> <span class="kw">null</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> config</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Key Technical Decisions</strong>:</p>
+<ol type="1">
+<li><strong>Full HD Viewport</strong>: 1920x1080 for accurate desktop
+testing</li>
+<li><strong>Extended Timeouts</strong>: 10-second defaults for network
+operations</li>
+<li><strong>Allure Writer Integration</strong>: Node events setup for
+report generation</li>
+<li><strong>Environment Variable Management</strong>: Centralized
+configuration approach</li>
+</ol>
+<h3 id="global-setup-and-error-handling">Global Setup and Error
+Handling</h3>
+<p><strong>File</strong>: <code>cypress/support/e2e.js</code></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Plugin imports</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&#39;@shelex/cypress-allure-plugin&#39;</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Global test preparation</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">beforeEach</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">clearCookies</span>()  <span class="co">// Clean state</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">intercept</span>({ <span class="dt">resourceType</span><span class="op">:</span> <span class="ss">/xhr</span><span class="sc">|</span><span class="ss">fetch/</span> }<span class="op">,</span> { <span class="dt">log</span><span class="op">:</span> <span class="kw">false</span> })<span class="op">;</span>  <span class="co">// Reduce noise</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Production-ready exception handling</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;uncaught:exception&#39;</span><span class="op">,</span> (err<span class="op">,</span> runnable) <span class="kw">=&gt;</span> {</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Strategic error filtering for real-world applications</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> ignoredErrors <span class="op">=</span> [</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;ResizeObserver loop limit exceeded&#39;</span><span class="op">,</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Non-Error promise rejection captured&#39;</span><span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Script error&#39;</span><span class="op">,</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;ChunkLoadError&#39;</span><span class="op">,</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Loading chunk&#39;</span><span class="op">,</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;auth.cookunity.com&#39;</span><span class="op">,</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;cross-origin&#39;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">!</span>ignoredErrors<span class="op">.</span><span class="fu">some</span>(pattern <span class="kw">=&gt;</span> err<span class="op">.</span><span class="at">message</span><span class="op">?.</span><span class="fu">includes</span>(pattern))<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Advanced Features</strong>: - <strong>Custom Chai
+Assertions</strong>: URL validation extensions - <strong>Strategic Error
+Filtering</strong>: Production environment compatibility -
+<strong>Network Interception</strong>: Performance optimization through
+log reduction</p>
+<hr />
+<h2 id="custom-commands-library">Custom Commands Library</h2>
+<h3 id="ui-command-implementation">UI Command Implementation</h3>
+<h4 id="homepage-navigation-with-popup-handling">1. Homepage Navigation
+with Popup Handling</h4>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;visitCookUnity&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">visit</span>(<span class="st">&#39;/&#39;</span>)  </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">wait</span>(<span class="dv">2000</span>)  <span class="co">// Allow page stabilization</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;body&#39;</span>)<span class="op">.</span><span class="fu">then</span>(($body) <span class="kw">=&gt;</span> {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Conditional popup handling</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ($body<span class="op">.</span><span class="fu">find</span>(<span class="st">&#39;.promo-popup&#39;</span>)<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;.close&#39;</span>)<span class="op">.</span><span class="fu">click</span>()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Technical Notes</strong>: - Defensive programming with
+conditional popup detection - DOM stabilization wait for dynamic content
+- Graceful handling of promotional overlays</p>
+<h4 id="zip-code-entry-with-api-validation">2. Zip Code Entry with API
+Validation</h4>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;enterZipCode&#39;</span><span class="op">,</span> (zipCode) <span class="kw">=&gt;</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">intercept</span>(<span class="st">&#39;GET&#39;</span><span class="op">,</span> <span class="st">&#39;**/api/validate-zipcode/*&#39;</span>)<span class="op">.</span><span class="fu">as</span>(<span class="st">&#39;validateZipcode&#39;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;[data-testid=&quot;funnel-start-form-zipcode-input&quot;]&#39;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)<span class="op">.</span><span class="fu">should</span>(<span class="st">&#39;be.visible&#39;</span>)<span class="op">.</span><span class="fu">type</span>(zipCode)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;[data-testid=&quot;input-zipcode-cta&quot;]&#39;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>)<span class="op">.</span><span class="fu">should</span>(<span class="st">&#39;be.visible&#39;</span>)<span class="op">.</span><span class="fu">click</span>()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  cy<span class="op">.</span><span class="fu">wait</span>(<span class="st">&#39;@validateZipcode&#39;</span><span class="op">,</span> { <span class="dt">timeout</span><span class="op">:</span> <span class="dv">60000</span> })</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Advanced Features</strong>: - <strong>Network
+Interception</strong>: API call monitoring - <strong>Extended
+Timeout</strong>: 60-second backend validation - <strong>Data-testid
+Selectors</strong>: Stable element identification - <strong>Visibility
+Assertions</strong>: Robust element interaction</p>
+<h4 id="dynamic-account-creation-with-email-generation">3. Dynamic
+Account Creation with Email Generation</h4>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;createAccount&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">origin</span>(<span class="st">&#39;https://auth.cookunity.com&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Cross-origin exception handling</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;uncaught:exception&#39;</span><span class="op">,</span> (err) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="kw">const</span> authErrors <span class="op">=</span> [<span class="st">&#39;auth&#39;</span><span class="op">,</span> <span class="st">&#39;login&#39;</span><span class="op">,</span> <span class="st">&#39;Script error&#39;</span>]<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="op">!</span>authErrors<span class="op">.</span><span class="fu">some</span>(pattern <span class="kw">=&gt;</span> err<span class="op">.</span><span class="at">message</span><span class="op">?.</span><span class="fu">includes</span>(pattern))<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Dynamic email generation strategy</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">function</span> <span class="fu">generateEmail</span>() {</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>          <span class="cf">return</span> <span class="vs">`qa.mail</span><span class="sc">${</span><span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="sc">}</span><span class="vs">@gmail.com`</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> userEmail <span class="op">=</span> <span class="fu">generateEmail</span>()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> userPassword <span class="op">=</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testPassword&#39;</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Multi-step authentication flow</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">wait</span>(<span class="dv">3000</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;button&#39;</span>)<span class="op">.</span><span class="fu">contains</span>(<span class="st">&#39;Sign up with email&#39;</span>)<span class="op">.</span><span class="fu">click</span>()</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;[data-testid=&quot;email&quot;]&#39;</span>)<span class="op">.</span><span class="fu">should</span>(<span class="st">&#39;be.visible&#39;</span>)<span class="op">.</span><span class="fu">type</span>(userEmail)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;button&#39;</span>)<span class="op">.</span><span class="fu">contains</span>(<span class="st">&#39;Sign Up&#39;</span>)<span class="op">.</span><span class="fu">click</span>()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;[data-testid=&quot;password&quot;]&#39;</span>)<span class="op">.</span><span class="fu">should</span>(<span class="st">&#39;be.visible&#39;</span>)<span class="op">.</span><span class="fu">type</span>(userPassword)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        cy<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;[data-testid=&quot;submit-form&quot;]&#39;</span>)<span class="op">.</span><span class="fu">should</span>(<span class="st">&#39;be.visible&#39;</span>)<span class="op">.</span><span class="fu">click</span>()</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    })        </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Technical Highlights</strong>: - <strong>Cross-Origin
+Navigation</strong>: Advanced Cypress capability utilization -
+<strong>Dynamic Email Generation</strong>: Timestamp-based uniqueness -
+<strong>Exception Scoping</strong>: Origin-specific error handling -
+<strong>Multi-Step Flow</strong>: Complete authentication sequence</p>
+<blockquote>
+<p><strong>Important Note</strong>: Dynamic email generation was
+implemented because the email address provided in the challenge PDF
+(<code>qa.mail@gmail.com</code>) was already registered in the CookUnity
+system. The timestamp-based generation ensures unique emails for each
+test execution, preventing registration conflicts and enabling
+repeatable test runs.</p>
+</blockquote>
+<h3 id="api-command-implementation">API Command Implementation</h3>
+<h4 id="generic-api-request-handler">1. Generic API Request Handler</h4>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;apiRequest&#39;</span><span class="op">,</span> (method<span class="op">,</span> endpoint<span class="op">,</span> body <span class="op">=</span> <span class="kw">null</span><span class="op">,</span> headers <span class="op">=</span> {}) <span class="kw">=&gt;</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> baseUrl <span class="op">=</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;gorestApiUrl&#39;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> token <span class="op">=</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;gorestToken&#39;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> defaultHeaders <span class="op">=</span> {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Authorization&#39;</span><span class="op">:</span> <span class="vs">`Bearer </span><span class="sc">${</span>token<span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span><span class="op">,</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>headers</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> requestOptions <span class="op">=</span> {</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    method<span class="op">,</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">url</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>baseUrl<span class="sc">}${</span>endpoint<span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headers</span><span class="op">:</span> defaultHeaders<span class="op">,</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">failOnStatusCode</span><span class="op">:</span> <span class="kw">false</span>  <span class="co">// Enable error scenario testing</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (body <span class="op">&amp;&amp;</span> [<span class="st">&#39;POST&#39;</span><span class="op">,</span> <span class="st">&#39;PATCH&#39;</span><span class="op">,</span> <span class="st">&#39;PUT&#39;</span>]<span class="op">.</span><span class="fu">includes</span>(method)) {</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    requestOptions<span class="op">.</span><span class="at">body</span> <span class="op">=</span> body</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> cy<span class="op">.</span><span class="fu">request</span>(requestOptions)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Design Principles</strong>: - <strong>Bearer Token
+Authentication</strong>: Secure API access - <strong>Flexible HTTP
+Methods</strong>: Support for all RESTful operations - <strong>Error
+Scenario Testing</strong>: Controlled failure handling - <strong>Header
+Extensibility</strong>: Additional header support</p>
+<h4 id="specialized-api-operations">2. Specialized API Operations</h4>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// User retrieval with pagination awareness</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;getUsers&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> cy<span class="op">.</span><span class="fu">apiRequest</span>(<span class="st">&#39;GET&#39;</span><span class="op">,</span> <span class="st">&#39;/users&#39;</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Individual user details with error handling</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;getUserById&#39;</span><span class="op">,</span> (userId) <span class="kw">=&gt;</span> {</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> cy<span class="op">.</span><span class="fu">apiRequest</span>(<span class="st">&#39;GET&#39;</span><span class="op">,</span> <span class="vs">`/users/</span><span class="sc">${</span>userId<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">// User modification with validation</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;updateUser&#39;</span><span class="op">,</span> (userId<span class="op">,</span> userData) <span class="kw">=&gt;</span> {</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> cy<span class="op">.</span><span class="fu">apiRequest</span>(<span class="st">&#39;PATCH&#39;</span><span class="op">,</span> <span class="vs">`/users/</span><span class="sc">${</span>userId<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> userData)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<h3 id="utility-commands">Utility Commands</h3>
+<h4 id="random-data-generation">Random Data Generation</h4>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="at">Commands</span><span class="op">.</span><span class="fu">add</span>(<span class="st">&#39;generateRandomName&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> names <span class="op">=</span> [<span class="st">&#39;John&#39;</span><span class="op">,</span> <span class="st">&#39;Jane&#39;</span><span class="op">,</span> <span class="st">&#39;Bob&#39;</span><span class="op">,</span> <span class="st">&#39;Alice&#39;</span><span class="op">,</span> <span class="st">&#39;Charlie&#39;</span><span class="op">,</span> <span class="st">&#39;Diana&#39;</span><span class="op">,</span> <span class="st">&#39;Eve&#39;</span><span class="op">,</span> <span class="st">&#39;Frank&#39;</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> surnames <span class="op">=</span> [<span class="st">&#39;Smith&#39;</span><span class="op">,</span> <span class="st">&#39;Johnson&#39;</span><span class="op">,</span> <span class="st">&#39;Brown&#39;</span><span class="op">,</span> <span class="st">&#39;Davis&#39;</span><span class="op">,</span> <span class="st">&#39;Wilson&#39;</span><span class="op">,</span> <span class="st">&#39;Moore&#39;</span><span class="op">,</span> <span class="st">&#39;Taylor&#39;</span><span class="op">,</span> <span class="st">&#39;Anderson&#39;</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> firstName <span class="op">=</span> names[<span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">*</span> names<span class="op">.</span><span class="at">length</span>)]</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lastName <span class="op">=</span> surnames[<span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">random</span>() <span class="op">*</span> surnames<span class="op">.</span><span class="at">length</span>)]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>firstName<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>lastName<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Benefits</strong>: - <strong>Test Data Variety</strong>:
+Prevents test data dependency - <strong>Realistic Scenarios</strong>:
+Human-like name combinations - <strong>Repeatable Randomness</strong>:
+Consistent test behavior</p>
+<hr />
+<h2 id="test-suite-analysis">Test Suite Analysis</h2>
+<h3 id="ui-test-implementation">UI Test Implementation</h3>
+<p><strong>File</strong>:
+<code>cypress/e2e/ui/cookunity-user-flow.cy.js</code></p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(<span class="st">&#39;CookUnity User Registration Flow&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> testData <span class="op">=</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">userInfo</span><span class="op">:</span> {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">email</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testEmail&#39;</span>)<span class="op">,</span>        <span class="co">// Configuration-driven</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">firstName</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testFirstName&#39;</span>)<span class="op">,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">lastName</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testLastName&#39;</span>)<span class="op">,</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">password</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testPassword&#39;</span>)<span class="op">,</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">zipCode</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testZipCode&#39;</span>)<span class="op">,</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">mealPlanCount</span><span class="op">:</span> <span class="dv">6</span>                        <span class="co">// Business logic constant</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;should complete user registration flow and reach meal selection page&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">visitCookUnity</span>()                       <span class="co">// Homepage navigation</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">enterZipCode</span>(testData<span class="op">.</span><span class="at">userInfo</span><span class="op">.</span><span class="at">zipCode</span>)  <span class="co">// Location validation</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">skipQuiz</span>()                             <span class="co">// Preference bypass</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">selectMealPlan</span>(testData<span class="op">.</span><span class="at">userInfo</span><span class="op">.</span><span class="at">mealPlanCount</span>)  <span class="co">// Plan selection</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">createAccount</span>()                        <span class="co">// Account creation</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">verifyMealSelectionPage</span>()             <span class="co">// Success validation</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Test Design Patterns</strong>: - <strong>Page Object
+Pattern</strong>: Abstracted through custom commands -
+<strong>Configuration-Driven Data</strong>: Environment variable
+utilization - <strong>Linear Flow Testing</strong>: Complete user
+journey validation - <strong>Assertion Strategy</strong>: Final state
+verification</p>
+<h3 id="api-test-suites">API Test Suites</h3>
+<h4 id="user-verification-tests-3-test-cases">User Verification Tests (3
+Test Cases)</h4>
+<p><strong>File</strong>:
+<code>cypress/e2e/api/gorest-users-verification.cy.js</code></p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(<span class="st">&#39;GoRest API - Users Verification&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> apiConfig <span class="op">=</span> {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">baseUrl</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;gorestApiUrl&#39;</span>)<span class="op">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">token</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;gorestToken&#39;</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Test Case 1: Complete verification workflow</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;should get users list, find active user, and verify user details&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">getUsers</span>()<span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(response<span class="op">.</span><span class="at">status</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="fu">equal</span>(<span class="dv">200</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(response<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">data</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">be</span><span class="op">.</span><span class="fu">an</span>(<span class="st">&#39;array&#39;</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> activeUsers <span class="op">=</span> response<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="fu">filter</span>(user <span class="kw">=&gt;</span> user<span class="op">.</span><span class="at">status</span> <span class="op">===</span> <span class="st">&#39;active&#39;</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> firstActiveUser <span class="op">=</span> activeUsers[<span class="dv">0</span>]</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> cy<span class="op">.</span><span class="fu">getUserById</span>(firstActiveUser<span class="op">.</span><span class="at">id</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    })<span class="op">.</span><span class="fu">then</span>((userDetailsResponse) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(userDetailsResponse<span class="op">.</span><span class="at">status</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="fu">equal</span>(<span class="dv">200</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(userDetailsResponse<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">status</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="fu">equal</span>(<span class="st">&#39;active&#39;</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Test Case 2: Error handling validation</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;should handle invalid user ID gracefully&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> invalidUserId <span class="op">=</span> <span class="dv">999999999</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">getUserById</span>(invalidUserId)<span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(response<span class="op">.</span><span class="at">status</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="fu">equal</span>(<span class="dv">404</span>)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Test Case 3: Data structure validation</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;should verify API response structure and data types&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">getUsers</span>()<span class="op">.</span><span class="fu">then</span>((response) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(response<span class="op">.</span><span class="at">body</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">have</span><span class="op">.</span><span class="fu">property</span>(<span class="st">&#39;data&#39;</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(response<span class="op">.</span><span class="at">body</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">have</span><span class="op">.</span><span class="fu">property</span>(<span class="st">&#39;meta&#39;</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect</span>(response<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">data</span>)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">be</span><span class="op">.</span><span class="fu">an</span>(<span class="st">&#39;array&#39;</span>)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (response<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> user <span class="op">=</span> response<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">data</span>[<span class="dv">0</span>]</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">expect</span>(user)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">have</span><span class="op">.</span><span class="fu">property</span>(<span class="st">&#39;id&#39;</span>)<span class="op">.</span><span class="at">that</span><span class="op">.</span><span class="at">is</span><span class="op">.</span><span class="fu">a</span>(<span class="st">&#39;number&#39;</span>)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">expect</span>(user)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">have</span><span class="op">.</span><span class="fu">property</span>(<span class="st">&#39;name&#39;</span>)<span class="op">.</span><span class="at">that</span><span class="op">.</span><span class="at">is</span><span class="op">.</span><span class="fu">a</span>(<span class="st">&#39;string&#39;</span>)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">expect</span>(user)<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="at">have</span><span class="op">.</span><span class="fu">property</span>(<span class="st">&#39;email&#39;</span>)<span class="op">.</span><span class="at">that</span><span class="op">.</span><span class="at">is</span><span class="op">.</span><span class="fu">a</span>(<span class="st">&#39;string&#39;</span>)</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">expect</span>([<span class="st">&#39;active&#39;</span><span class="op">,</span> <span class="st">&#39;inactive&#39;</span>])<span class="op">.</span><span class="at">to</span><span class="op">.</span><span class="fu">include</span>(user<span class="op">.</span><span class="at">status</span>)</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Testing Strategies</strong>: - <strong>Happy Path
+Validation</strong>: Complete workflow verification - <strong>Error
+Scenario Testing</strong>: Invalid input handling - <strong>Schema
+Validation</strong>: Data structure verification - <strong>Type
+Safety</strong>: Runtime type checking</p>
+<h4 id="user-update-tests-5-test-cases">User Update Tests (5 Test
+Cases)</h4>
+<p><strong>File</strong>:
+<code>cypress/e2e/api/gorest-users-update.cy.js</code></p>
+<p>The update test suite demonstrates comprehensive CRUD operations:</p>
+<ol type="1">
+<li><strong>Complete User Update</strong>: Full data modification
+workflow</li>
+<li><strong>Invalid User Handling</strong>: Non-existent user error
+scenarios</li>
+<li><strong>Partial Updates</strong>: Field-specific modification
+testing</li>
+<li><strong>Random Data Testing</strong>: Dynamic data generation
+validation</li>
+<li><strong>Authentication Testing</strong>: Token validation and
+security</li>
+</ol>
+<p><strong>Technical Highlights</strong>: - <strong>Data Persistence
+Verification</strong>: Update confirmation through re-fetching -
+<strong>Authentication Testing</strong>: Invalid token scenario handling
+- <strong>Random Data Integration</strong>: Dynamic test data
+utilization - <strong>Error Code Validation</strong>: HTTP status code
+verification</p>
+<hr />
+<h2 id="configuration-management">Configuration Management</h2>
+<h3 id="environment-variables-strategy">Environment Variables
+Strategy</h3>
+<p><strong>Primary Configuration</strong>:
+<code>cypress.config.js</code></p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>env<span class="op">:</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Allure reporting control</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">allure</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// API endpoint configuration</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">gorestApiUrl</span><span class="op">:</span> <span class="st">&#39;https://gorest.co.in/public/v1&#39;</span><span class="op">,</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">gorestToken</span><span class="op">:</span> <span class="st">&#39;55d6636b25b84832f383665a17f72117ee2b5e655a78ba968912c9a37d1c050f&#39;</span><span class="op">,</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Test data configuration</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">testFirstName</span><span class="op">:</span> <span class="st">&#39;My Name&#39;</span><span class="op">,</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">testLastName</span><span class="op">:</span> <span class="st">&#39;My Lastname&#39;</span><span class="op">,</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">testPassword</span><span class="op">:</span> <span class="st">&#39;123123123&#39;</span><span class="op">,</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">testZipCode</span><span class="op">:</span> <span class="st">&#39;10001&#39;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="allure-configuration">Allure Configuration</h3>
+<p><strong>File</strong>: <code>allure.properties</code></p>
+<pre class="properties"><code>allure.results.directory=allure-results
+allure.cypress.log.commands=true
+allure.cypress.log.requests=true
+allure.skip.automatic.screenshot=false
+allure.omit.previous.attempt.screenshot=false
+allure.video.passed=false</code></pre>
+<p><strong>Configuration Benefits</strong>: - <strong>Centralized
+Management</strong>: Single source of truth - <strong>Environment
+Flexibility</strong>: Easy deployment configuration - <strong>Security
+Considerations</strong>: Token management - <strong>Feature
+Toggles</strong>: Allure enable/disable capability</p>
+<hr />
+<h2 id="allure-reporting-integration">Allure Reporting Integration</h2>
+<h3 id="implementation-architecture">Implementation Architecture</h3>
+<pre><code>Test Execution → Allure Results → Report Generation → Web Serving
+     ↓              ↓                  ↓              ↓
+Cypress Runner → JSON Files → HTML Report → Browser Display</code></pre>
+<h3 id="allure-plugin-configuration">Allure Plugin Configuration</h3>
+<p><strong>Setup in cypress.config.js</strong>:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> allureWriter <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;@shelex/cypress-allure-plugin/writer&#39;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setupNodeEvents</span>(on<span class="op">,</span> config) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">allureWriter</span>(on<span class="op">,</span> config)  <span class="co">// Event listener registration</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> config</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Support File Integration</strong>:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&#39;@shelex/cypress-allure-plugin&#39;</span><span class="op">;</span></span></code></pre></div>
+<h3 id="report-features">Report Features</h3>
+<h4 id="generated-artifacts">Generated Artifacts</h4>
+<ul>
+<li><strong>Test Results</strong>: Detailed execution reports with
+timelines</li>
+<li><strong>Screenshots</strong>: Automatic failure capture and
+attachment</li>
+<li><strong>Videos</strong>: Complete test execution recordings</li>
+<li><strong>Network Logs</strong>: API request/response details</li>
+<li><strong>Environment Info</strong>: Test execution context</li>
+</ul>
+<h4 id="advanced-analytics">Advanced Analytics</h4>
+<ul>
+<li><strong>Historical Trends</strong>: Multi-run comparison and
+analysis</li>
+<li><strong>Flaky Test Detection</strong>: Stability monitoring over
+time</li>
+<li><strong>Performance Metrics</strong>: Execution time analysis</li>
+<li><strong>Test Categorization</strong>: Feature and story
+organization</li>
+</ul>
+<h3 id="npm-script-integration">NPM Script Integration</h3>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;test:report&quot;</span><span class="fu">:</span> <span class="st">&quot;cypress run&quot;</span><span class="fu">,</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;allure:report&quot;</span><span class="fu">:</span> <span class="st">&quot;allure generate allure-results --clean -o allure-report&quot;</span><span class="fu">,</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;allure:open&quot;</span><span class="fu">:</span> <span class="st">&quot;allure open allure-report&quot;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>Workflow</strong>: 1. <code>npm run test:report</code> -
+Execute tests with Allure data collection 2.
+<code>npm run allure:report</code> - Generate HTML reports from results
+3. <code>npm run allure:open</code> - Launch report server for
+viewing</p>
+<hr />
+<h2 id="design-patterns-and-best-practices">Design Patterns and Best
+Practices</h2>
+<h3 id="command-pattern-implementation">Command Pattern
+Implementation</h3>
+<p>Custom commands serve as a <strong>Command Pattern</strong>
+implementation, encapsulating: - <strong>Request Logic</strong>:
+Parameter handling and validation - <strong>Execution Strategy</strong>:
+Implementation details abstraction - <strong>Error Handling</strong>:
+Consistent exception management - <strong>Reusability</strong>:
+Cross-test functionality sharing</p>
+<h3 id="page-object-model-implied">Page Object Model (Implied)</h3>
+<p>While not explicitly implemented as classes, the custom command
+structure follows POM principles: - <strong>Encapsulation</strong>: UI
+interactions abstracted into commands -
+<strong>Maintainability</strong>: Centralized element management -
+<strong>Reusability</strong>: Shared functionality across tests -
+<strong>Separation of Concerns</strong>: Test logic vs. implementation
+details</p>
+<h3 id="data-driven-testing">Data-Driven Testing</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Configuration-driven approach</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> testData <span class="op">=</span> {</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">userInfo</span><span class="op">:</span> {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">email</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testEmail&#39;</span>)<span class="op">,</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">firstName</span><span class="op">:</span> Cypress<span class="op">.</span><span class="fu">env</span>(<span class="st">&#39;testFirstName&#39;</span>)<span class="op">,</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... additional configuration</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Benefits</strong>: - <strong>Environment
+Flexibility</strong>: Easy test data modification - <strong>Maintenance
+Efficiency</strong>: Centralized data management - <strong>Test
+Reusability</strong>: Configuration-based test variants</p>
+<h3 id="error-handling-strategy">Error Handling Strategy</h3>
+<h4 id="three-layer-approach">Three-Layer Approach</h4>
+<ol type="1">
+<li><strong>Global Level</strong>: <code>cypress/support/e2e.js</code>
+<ul>
+<li>Application-wide exception filtering</li>
+<li>Production environment compatibility</li>
+<li>Framework-level error management</li>
+</ul></li>
+<li><strong>Command Level</strong>: Custom command implementations
+<ul>
+<li>Operation-specific error handling</li>
+<li>Timeout management</li>
+<li>Graceful degradation</li>
+</ul></li>
+<li><strong>Test Level</strong>: Individual test specifications
+<ul>
+<li>Business logic validation</li>
+<li>Assertion-based error detection</li>
+<li>Test-specific error scenarios</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="performance-considerations">Performance Considerations</h2>
+<h3 id="network-optimization">Network Optimization</h3>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">beforeEach</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">intercept</span>({ <span class="dt">resourceType</span><span class="op">:</span> <span class="ss">/xhr</span><span class="sc">|</span><span class="ss">fetch/</span> }<span class="op">,</span> { <span class="dt">log</span><span class="op">:</span> <span class="kw">false</span> })<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Benefits</strong>: - <strong>Log Reduction</strong>:
+Decreased console noise - <strong>Performance Improvement</strong>:
+Faster test execution - <strong>Focus Enhancement</strong>: Relevant
+logging only</p>
+<h3 id="timeout-management">Timeout Management</h3>
+<p><strong>Strategic Timeout Configuration</strong>: - <strong>Default
+Commands</strong>: 10 seconds for standard operations - <strong>Network
+Operations</strong>: 60 seconds for API validations - <strong>Page
+Loads</strong>: Extended timeouts for complex applications -
+<strong>Element Waiting</strong>: Specific timeouts for dynamic
+content</p>
+<h3 id="memory-management">Memory Management</h3>
+<p><strong>Cookie Cleanup Strategy</strong>:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">beforeEach</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">clearCookies</span>()  <span class="co">// Prevent test interference</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<hr />
+<h2 id="maintenance-and-scalability">Maintenance and Scalability</h2>
+<h3 id="code-organization-principles">Code Organization Principles</h3>
+<h4 id="modular-structure">Modular Structure</h4>
+<ul>
+<li><strong>Separation of Concerns</strong>: UI, API, and utility
+commands isolated</li>
+<li><strong>Single Responsibility</strong>: Each command handles one
+specific task</li>
+<li><strong>Dependency Management</strong>: Clear import/export
+relationships</li>
+</ul>
+<h4 id="naming-conventions">Naming Conventions</h4>
+<ul>
+<li><strong>Descriptive Commands</strong>:
+<code>visitCookUnity()</code>, <code>enterZipCode()</code></li>
+<li><strong>Consistent Patterns</strong>: Verb-noun structure for
+actions</li>
+<li><strong>JSDoc Documentation</strong>: Comprehensive parameter
+documentation</li>
+</ul>
+<h3 id="scalability-considerations">Scalability Considerations</h3>
+<h4 id="horizontal-scaling">Horizontal Scaling</h4>
+<ul>
+<li><strong>Parallel Execution</strong>: Cypress cloud integration
+ready</li>
+<li><strong>Test Isolation</strong>: Independent test execution
+capability</li>
+<li><strong>Resource Management</strong>: Optimized for concurrent
+runs</li>
+</ul>
+<h4 id="vertical-scaling">Vertical Scaling</h4>
+<ul>
+<li><strong>Command Library Extension</strong>: Easy custom command
+addition</li>
+<li><strong>Configuration Expansion</strong>: Environment variable
+extension</li>
+<li><strong>Report Enhancement</strong>: Additional Allure features
+integration</li>
+</ul>
+<hr />
+<h2 id="technical-challenges-and-solutions">Technical Challenges and
+Solutions</h2>
+<h3 id="cross-origin-authentication">1. Cross-Origin Authentication</h3>
+<p><strong>Challenge</strong>: CookUnity uses separate authentication
+domain (<code>auth.cookunity.com</code>)</p>
+<p><strong>Solution</strong>:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cy<span class="op">.</span><span class="fu">origin</span>(<span class="st">&#39;https://auth.cookunity.com&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Cross-origin specific error handling</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    cy<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;uncaught:exception&#39;</span><span class="op">,</span> (err) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Domain-specific exception filtering</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Authentication flow implementation</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Technical Benefits</strong>: - <strong>Domain
+Isolation</strong>: Proper cross-origin handling - <strong>Error
+Scoping</strong>: Origin-specific exception management -
+<strong>Security Compliance</strong>: Respect for CORS policies</p>
+<h3 id="dynamic-email-generation">2. Dynamic Email Generation</h3>
+<p><strong>Challenge</strong>: Registration email conflicts with
+existing accounts</p>
+<p><strong>Solution</strong>:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">generateEmail</span>() {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="vs">`qa.mail</span><span class="sc">${</span><span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="sc">}</span><span class="vs">@gmail.com`</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Technical Benefits</strong>: - <strong>Uniqueness
+Guarantee</strong>: Timestamp-based generation - <strong>Test
+Repeatability</strong>: No manual cleanup required - <strong>Conflict
+Prevention</strong>: Automatic collision avoidance</p>
+<h3 id="allure-integration-complexity">3. Allure Integration
+Complexity</h3>
+<p><strong>Challenge</strong>: Complex setup for enterprise-grade
+reporting</p>
+<p><strong>Solution</strong>: Multi-layer configuration approach -
+<strong>Plugin Integration</strong>:
+<code>@shelex/cypress-allure-plugin</code> - <strong>Environment
+Configuration</strong>: <code>allure: true</code> flag -
+<strong>Properties File</strong>: <code>allure.properties</code>
+customization</p>
+<p><strong>Technical Benefits</strong>: - <strong>Rich
+Visualizations</strong>: Enterprise-grade reporting - <strong>Historical
+Analysis</strong>: Multi-run trend tracking - <strong>Debugging
+Enhancement</strong>: Detailed execution insights</p>
+<h3 id="production-environment-compatibility">4. Production Environment
+Compatibility</h3>
+<p><strong>Challenge</strong>: Real-world application errors affecting
+test stability</p>
+<p><strong>Solution</strong>: Strategic error filtering</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Cypress<span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;uncaught:exception&#39;</span><span class="op">,</span> (err<span class="op">,</span> runnable) <span class="kw">=&gt;</span> {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> ignoredErrors <span class="op">=</span> [</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;ResizeObserver loop limit exceeded&#39;</span><span class="op">,</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Non-Error promise rejection captured&#39;</span><span class="op">,</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ... additional production errors</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">!</span>ignoredErrors<span class="op">.</span><span class="fu">some</span>(pattern <span class="kw">=&gt;</span> err<span class="op">.</span><span class="at">message</span><span class="op">?.</span><span class="fu">includes</span>(pattern))<span class="op">;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p><strong>Technical Benefits</strong>: - <strong>Test
+Stability</strong>: Reduced false failures - <strong>Production
+Compatibility</strong>: Real environment testing - <strong>Maintenance
+Efficiency</strong>: Automated error handling</p>
+<hr />
+<h2 id="quality-assurance-metrics">Quality Assurance Metrics</h2>
+<h3 id="test-coverage-analysis">Test Coverage Analysis</h3>
+<h4 id="ui-testing-coverage">UI Testing Coverage</h4>
+<ul>
+<li><strong>User Journey</strong>: Complete registration flow
+(100%)</li>
+<li><strong>Error Scenarios</strong>: Popup handling, network
+timeouts</li>
+<li><strong>Cross-Origin</strong>: Authentication domain navigation</li>
+<li><strong>Responsive Design</strong>: Full HD viewport testing</li>
+</ul>
+<h4 id="api-testing-coverage">API Testing Coverage</h4>
+<ul>
+<li><strong>CRUD Operations</strong>: Create, Read, Update, Delete
+(75%)</li>
+<li><strong>Authentication</strong>: Bearer token validation (100%)</li>
+<li><strong>Error Handling</strong>: Invalid requests, missing resources
+(100%)</li>
+<li><strong>Data Validation</strong>: Schema and type verification
+(100%)</li>
+</ul>
+<h3 id="code-quality-metrics">Code Quality Metrics</h3>
+<h4 id="maintainability-index">Maintainability Index</h4>
+<ul>
+<li><strong>Custom Commands</strong>: 14 reusable functions</li>
+<li><strong>Code Duplication</strong>: Minimized through
+abstraction</li>
+<li><strong>Documentation</strong>: Comprehensive JSDoc coverage</li>
+<li><strong>Error Handling</strong>: Three-layer strategy
+implementation</li>
+</ul>
+<h4 id="performance-benchmarks">Performance Benchmarks</h4>
+<ul>
+<li><strong>Test Execution Time</strong>: ~47 seconds for complete
+suite</li>
+<li><strong>Network Optimization</strong>: Reduced logging overhead</li>
+<li><strong>Resource Usage</strong>: Efficient memory management</li>
+<li><strong>Parallel Readiness</strong>: Independent test execution</li>
+</ul>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>The CookUnity QA Automation Framework represents a sophisticated
+implementation of modern testing practices, combining robust UI
+automation with comprehensive API testing under a unified Allure
+reporting umbrella. The framework demonstrates:</p>
+<h3 id="technical-excellence">Technical Excellence</h3>
+<ul>
+<li><strong>Advanced Cypress Features</strong>: Cross-origin navigation,
+custom commands, network interception</li>
+<li><strong>Enterprise Reporting</strong>: Rich Allure integration with
+historical analysis</li>
+<li><strong>Production Readiness</strong>: Real-world error handling and
+environment compatibility</li>
+<li><strong>Scalable Architecture</strong>: Modular design supporting
+team collaboration</li>
+</ul>
+<h3 id="business-value">Business Value</h3>
+<ul>
+<li><strong>Risk Mitigation</strong>: Comprehensive test coverage across
+critical user journeys</li>
+<li><strong>Quality Assurance</strong>: Automated validation of both
+frontend and backend systems</li>
+<li><strong>Efficiency Gains</strong>: Reusable components reducing
+development overhead</li>
+<li><strong>Visibility Enhancement</strong>: Detailed reporting enabling
+data-driven decisions</li>
+</ul>
+<h3 id="innovation-highlights">Innovation Highlights</h3>
+<ul>
+<li><strong>Dynamic Data Generation</strong>: Intelligent test data
+management preventing conflicts</li>
+<li><strong>Cross-Domain Testing</strong>: Advanced authentication flow
+validation</li>
+<li><strong>Error Resilience</strong>: Production-environment
+compatibility through strategic filtering</li>
+<li><strong>Analytics Integration</strong>: Historical trend analysis
+for continuous improvement</li>
+</ul>
+<p>This framework establishes a foundation for enterprise-scale test
+automation, demonstrating both technical proficiency and practical
+understanding of real-world testing challenges.</p>
+<hr />
+<p><strong>Document Version</strong>: 1.0.0<br />
+<strong>Last Updated</strong>: July 2024<br />
+<strong>Author</strong>: Wagner Salustiano<br />
+<strong>Framework Version</strong>: Cypress 14.5.2 + Allure 2.25.0</p>
+</body>
+</html>

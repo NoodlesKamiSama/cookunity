@@ -1,0 +1,34 @@
+{
+  "name": "cookunity-qa-automation",
+  "version": "1.0.0",
+  "description": "Cypress automation tests for CookUnity - UI and API testing",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:ui": "cypress run --spec 'cypress/e2e/ui/**/*.cy.js'",
+    "cypress:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.js'",
+    "test": "cypress run",
+    "test:ui": "npm run cypress:run:ui",
+    "test:api": "npm run cypress:run:api",
+    "test:report": "cypress run",
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report"
+  },
+  "keywords": [
+    "cypress",
+    "automation",
+    "testing",
+    "qa",
+    "cookunity",
+    "ui",
+    "api"
+  ],
+  "author": "Wagner Salustiano (NoodlesKamiSama)",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^14.5.2",
+    "@shelex/cypress-allure-plugin": "^2.40.2",
+    "allure-commandline": "^2.25.0"
+  }
+}
